@@ -747,6 +747,16 @@ int fl_startImageReplace(fl_BootImageInfo* bootImageInfo, unsigned maxsize)
 
 #define VALIDATE
 
+int fl_seekImage(unsigned int address)
+{
+  address += fl_imageWriteState.baseAddress;
+  if (address < fl_imageWriteState.limitAddress) {
+    fl_imageWriteState.currentAddress = address;
+    return 0;
+  }
+  return 1;
+}
+
 int fl_writeImagePage(const unsigned char page[])
 {
   unsigned pageSize = fl_getPageSize();

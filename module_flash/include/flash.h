@@ -313,6 +313,16 @@ int fl_startImageReplace(fl_BootImageInfo &bootImageInfo, unsigned maxsize);
 #endif
 
 /**
+ * Sets the address of the next page to write. Normally, data is written in
+ * pages from address 0 in the image onwards. This function allows you to
+ * write pages out of order.
+ * \param address The address to write to inside the image. Should be a
+ *                multiple of the pagesize.
+ * \return 0 on success, non zero on failure.
+ */
+int fl_seekImage(unsigned int address);
+
+/**
  * Waits until the SPI device is ready to write the next page and outputs
  * the next page of data to the device. Attempting to write past the maximum
  * size passed to fl_startImageUpdate or fl_startImageAdd is invalid.
